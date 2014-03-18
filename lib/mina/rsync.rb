@@ -16,7 +16,6 @@ set_default :rsync_stage, "tmp/deploy"
 # Cache is used on the server to copy files to from to the release directory.
 # Saves you rsyncing your whole app folder each time.
 set_default :rsync_cache, "shared/deploy"
-set_default :rsync_stage_sub_folder, ""
 
 run = lambda do |*cmd|
   cmd = cmd[0] if cmd[0].is_a?(Array)
@@ -37,7 +36,8 @@ task :rsync => %w[rsync:stage] do
 
   rsync = %w[rsync]
   rsync.concat settings.rsync_options
-  rsync << settings.rsync_stage + "/" + (settings.rsync_stage_sub_folder == "") ? "" : settings.rsync_stage_sub_folder + "/"
+  settings.rsync_stage += settings.rsync_stage_sub_folder if settings.rsync_stage_sub_folder
+  rsync << settings.rsync_stage + "/"
 
   user = settings.user + "@" if settings.user
   host = settings.domain
