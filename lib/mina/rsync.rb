@@ -38,7 +38,7 @@ task :rsync => %w[rsync:stage] do
   rsync = %w[rsync]
   rsync.concat settings.rsync_options
   rsync << settings.rsync_stage + "/"
-  rsync << settings.rsync_stage_sub_folder + "/" unless settings.rsync_stage_sub_folder.blank?
+  rsync << settings.rsync_stage_sub_folder + "/" unless settings.rsync_stage_sub_folder == ""
 
   user = settings.user + "@" if settings.user
   host = settings.domain
