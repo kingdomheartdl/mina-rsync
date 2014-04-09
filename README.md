@@ -30,6 +30,11 @@ Set some `rsync_options` to your liking:
 set :rsync_options, %w[--recursive --delete --delete-excluded --exclude .git*]
 ```
 
+Set sub folder as base for rsync. In the following example, it's called `src`.
+```ruby
+set :rsync_stage_sub_folder, "src"
+```
+
 Then invoke Mina::Rsync's tasks from your `deploy` task:
 ```ruby
 task :deploy do
