@@ -72,8 +72,8 @@ namespace :rsync do
   end
 
   task :build do
-    comment 'echo "-> Copying from cache directory to build path"'
-    run "#{settings.rsync_copy} \"#{rsync_cache.call}/\" \".\""
+    comment 'Copying from cache directory to build path'
+    command "#{settings.rsync_copy} \"#{rsync_cache.call}/\" \".\""
   end
 
   desc "Stage, rsync and copy to the build path."
